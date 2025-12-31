@@ -29,107 +29,109 @@ export default function Home() {
 
   return (
     <div className="w-full relative flex flex-col font-body text-gray-700">
-      {/* ================= HERO ================= */}
-      <div
-        className="relative w-full flex items-center justify-center text-center
-                   bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700
-                   pt-[64px] md:min-h-screen" // Mobile pe margin ko remove karke padding-top use kiya
+{/* ================= HERO ================= */}
+<div
+  className="relative w-full min-h-screen flex items-center justify-center text-center
+             bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700"
+  style={{ marginTop: `${NAVBAR_HEIGHT}px` }}
+>
+  <div className="px-6 max-w-3xl">
+
+    {/* Main Heading */}
+    <motion.h1
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="text-3xl sm:text-4xl md:text-5xl
+                 font-heading font-semibold
+                 tracking-tight text-white mb-4"
+    >
+      Welcome to{" "}
+      <span className="text-yellow-400 font-semibold">
+        Bajaj Auto Sales
+      </span>
+    </motion.h1>
+
+    {/* Subheading */}
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.15 }}
+      className="text-sm sm:text-base md:text-lg
+                 text-blue-200 leading-relaxed mb-8"
+    >
+      An authorised Bajaj dealership delivering performance,
+      reliability and trusted after-sales service.
+    </motion.p>
+
+    {/* CTA Buttons */}
+    <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+
+      <motion.a
+        href="/enquiry"
+        whileHover={{ scale: 1.02 }}
+        className="inline-flex items-center justify-center
+                   px-8 py-3
+                   bg-yellow-400 text-blue-900
+                   font-medium rounded-md
+                   shadow-sm hover:bg-yellow-500 transition"
       >
-        <div className="px-6 max-w-3xl">
+        Enquiry Now
+      </motion.a>
 
-          {/* Main Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="text-3xl sm:text-4xl md:text-5xl
-                       font-heading font-semibold
-                       tracking-tight text-white mb-4"
-          >
-            Welcome to{" "}
-            <span className="text-yellow-400 font-semibold">
-              Bajaj Auto Sales
-            </span>
-          </motion.h1>
+      <motion.a
+        href="/motorcycle"
+        whileHover={{ scale: 1.02 }}
+        className="inline-flex items-center justify-center
+                   px-8 py-3
+                   border border-yellow-400
+                   text-yellow-400 font-medium
+                   rounded-md
+                   hover:bg-yellow-400 hover:text-blue-900 transition"
+      >
+        View Latest Models
+      </motion.a>
 
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.15 }}
-            className="text-sm sm:text-base md:text-lg
-                       text-blue-200 leading-relaxed mb-8"
-          >
-            An authorised Bajaj dealership delivering performance,
-            reliability and trusted after-sales service.
-          </motion.p>
+    </div>
+    {/* USP Badges */}
+    <div className="flex flex-wrap justify-center gap-4 mb-8">
+      {[
+        "⭐ High Performance",
+        "⭐ Fuel Efficient",
+        "⭐ Advanced Safety",
+        "⭐ Stylish Design",
+      ].map((badge, i) => (
+        <motion.span
+          key={i}
+          className="bg-white/20 text-white px-4 py-2 rounded-full font-medium text-sm md:text-base"
+          whileHover={{ scale: 1.05 }}
+        >
+          {badge}
+        </motion.span>
+      ))}
+    </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-            <motion.a
-              href="/enquiry"
-              whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center justify-center
-                         px-8 py-3
-                         bg-yellow-400 text-blue-900
-                         font-medium rounded-md
-                         shadow-sm hover:bg-yellow-500 transition"
-            >
-              Enquiry Now
-            </motion.a>
+    {/* Customer Tagline */}
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+      className="text-blue-100 italic mb-10"
+    >
+      "Trusted by 2K+ riders for over 3 years of excellence!"
+    </motion.p>
 
-            <motion.a
-              href="/motorcycle"
-              whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center justify-center
-                         px-8 py-3
-                         border border-yellow-400
-                         text-yellow-400 font-medium
-                         rounded-md
-                         hover:bg-yellow-400 hover:text-blue-900 transition"
-            >
-              View Latest Models
-            </motion.a>
-          </div>
+    {/* Scroll Indicator */}
+    <motion.div
+      animate={{ y: [0, 10, 0] }}
+      transition={{ repeat: Infinity, duration: 1.5 }}
+      className="text-white text-2xl"
+    >
+      ⬇ Explore Models
+    </motion.div>
+  </div>
+</div>
 
-          {/* USP Badges */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {[
-              "⭐ High Performance",
-              "⭐ Fuel Efficient",
-              "⭐ Advanced Safety",
-              "⭐ Stylish Design",
-            ].map((badge, i) => (
-              <motion.span
-                key={i}
-                className="bg-white/20 text-white px-4 py-2 rounded-full font-medium text-sm md:text-base"
-                whileHover={{ scale: 1.05 }}
-              >
-                {badge}
-              </motion.span>
-            ))}
-          </div>
-
-          {/* Customer Tagline */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-blue-100 italic mb-10"
-          >
-            "Trusted by 2K+ riders for over 3 years of excellence!"
-          </motion.p>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="text-white text-2xl"
-          >
-            ⬇ Explore Models
-          </motion.div>
-        </div>
-      </div>
 
       {/* ================= ABOUT ================= */}
       <section className="py-16 bg-white text-center px-6">
@@ -313,6 +315,7 @@ export default function Home() {
           Contact Us
         </a>
       </section>
+
     </div>
   );
 }

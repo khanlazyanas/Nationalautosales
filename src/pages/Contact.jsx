@@ -13,12 +13,20 @@ export default function Contact() {
     message: ""
   });
 
+  const [sending, setSending] = useState(false); // For button loading state
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Optimistic UI: show success immediately
+    toast.success("Message sent successfully!");
+    setForm({ name: "", email: "", phone: "", message: "" });
+
+    setSending(true);
 
     try {
       const res = await fetch(API_URL, {
@@ -31,20 +39,12 @@ export default function Contact() {
 
       if (!res.ok) {
         toast.error(data.message || "Something went wrong");
-        return;
       }
-
-      toast.success("Message sent successfully!");
-
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        message: ""
-      });
 
     } catch (error) {
       toast.error("Server Error");
+    } finally {
+      setSending(false);
     }
   };
 
@@ -115,6 +115,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Your Name"
                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               />
             </div>
 
@@ -127,6 +128,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="you@example.com"
                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               />
             </div>
 
@@ -139,6 +141,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="e.g. +91 9198090051"
                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               />
             </div>
 
@@ -151,14 +154,16 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="Your message..."
                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                required
               ></textarea>
             </div>
 
             <button
               type="submit"
-              className="bg-yellow-400 text-blue-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition w-full"
+              disabled={sending}
+              className={`bg-yellow-400 text-blue-900 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition w-full ${sending ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
-              Send Message
+              {sending ? "Sending..." : "Send Message"}
             </button>
 
           </form>
