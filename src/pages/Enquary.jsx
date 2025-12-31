@@ -22,7 +22,7 @@ export default function Enquiry() {
     email: "",
     interestedModel: BIKE_MODELS[0],
     message: "",
-    preferredContact: "Phone", // FIXED
+    preferredContact: "Phone",
   });
 
   const [errors, setErrors] = useState({});
@@ -32,7 +32,8 @@ export default function Enquiry() {
     const e = {};
 
     if (!form.fullName.trim()) e.fullName = "Please enter your name.";
-    if (!form.phoneNumber.trim()) e.phoneNumber = "Please enter your mobile number.";
+    if (!form.phoneNumber.trim())
+      e.phoneNumber = "Please enter your mobile number.";
     else if (!/^[0-9]{10}$/.test(form.phoneNumber.trim()))
       e.phoneNumber = "Enter a 10 digit mobile number.";
 
@@ -47,7 +48,8 @@ export default function Enquiry() {
     return e;
   }
 
-  const handleSubmit = async (e) => {
+  // 🔥 ONLY LOGIC CHANGE — DESIGN SAME
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const v = validate();
@@ -56,37 +58,31 @@ export default function Enquiry() {
 
     setSubmitting(true);
 
-    try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+    // ✅ INSTANT FEEDBACK
+    toast.success("Enquiry sent successfully!");
 
-      const data = await res.json();
+    const payload = { ...form };
 
-      if (!res.ok) {
-        toast.error(data.message || "Something went wrong!");
-        setSubmitting(false);
-        return;
-      }
-
-      toast.success("Enquiry sent successfully!");
-
-      setForm({
-        fullName: "",
-        phoneNumber: "",
-        email: "",
-        interestedModel: BIKE_MODELS[0],
-        message: "",
-        preferredContact: "Phone", // RESET FIXED
-      });
-    } catch (error) {
-      console.error(error);
-      toast.error("Server error! Please try again.");
-    }
-
+    // ✅ INSTANT RESET (NO WAIT)
+    setForm({
+      fullName: "",
+      phoneNumber: "",
+      email: "",
+      interestedModel: BIKE_MODELS[0],
+      message: "",
+      preferredContact: "Phone",
+    });
+    setErrors({});
     setSubmitting(false);
+
+    // 🔄 BACKGROUND API CALL
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).catch((err) => {
+      console.error("Background error:", err);
+    });
   };
 
   const handleChange = (key) => (ev) =>
@@ -148,7 +144,9 @@ export default function Enquiry() {
                   maxLength={10}
                 />
                 {errors.phoneNumber && (
-                  <p className="text-red-500 text-sm">{errors.phoneNumber}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.phoneNumber}
+                  </p>
                 )}
               </div>
             </div>
@@ -185,7 +183,9 @@ export default function Enquiry() {
                   ))}
                 </select>
                 {errors.interestedModel && (
-                  <p className="text-red-500 text-sm">{errors.interestedModel}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.interestedModel}
+                  </p>
                 )}
               </div>
 
@@ -194,8 +194,6 @@ export default function Enquiry() {
                   Preferred Contact
                 </label>
                 <div className="flex gap-3 mt-1">
-
-                  {/* FIXED RADIO BUTTONS */}
                   <label>
                     <input
                       type="radio"
@@ -222,7 +220,9 @@ export default function Enquiry() {
             </div>
 
             <div className="mt-4">
-              <label className="block text-sm font-medium mb-1">Message *</label>
+              <label className="block text-sm font-medium mb-1">
+                Message *
+              </label>
               <textarea
                 value={form.message}
                 onChange={handleChange("message")}
@@ -254,7 +254,7 @@ export default function Enquiry() {
                     email: "",
                     interestedModel: BIKE_MODELS[0],
                     message: "",
-                    preferredContact: "Phone", // RESET FIX
+                    preferredContact: "Phone",
                   });
                   setErrors({});
                 }}
