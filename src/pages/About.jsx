@@ -63,9 +63,9 @@ export default function About() {
           variants={fadeUp}
           className="max-w-7xl mx-auto px-6 lg:px-12 py-20 text-center"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+          <h6 className="text-4xl md:text-5xl font-extrabold mb-4">
             Welcome to <span className="text-yellow-400">National Bajaj</span>
-          </h1>
+          </h6>
           <p className="text-lg md:text-xl max-w-3xl mx-auto">
             Your trusted Bajaj dealership, delivering performance and quality since 20XX.  
             We provide unmatched customer experience.
