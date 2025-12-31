@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 export default function Navbar() {
@@ -6,14 +7,14 @@ export default function Navbar() {
   const [isMobile, setIsMobile] = useState(false);
 
   const links = [
-    { name: "Home", href: "/" },
-    { name: "Motorcycle", href: "/motorcycle" },
-    { name: "About Us", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Contact", href: "/contact" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Offers", href: "/offers" },
-    { name: "Enquiry", href: "/enquiry" },
+    { name: "Home", to: "/" },
+    { name: "Motorcycle", to: "/motorcycle" },
+    { name: "About Us", to: "/about" },
+    { name: "Services", to: "/services" },
+    { name: "Contact", to: "/contact" },
+    { name: "Gallery", to: "/gallery" },
+    { name: "Offers", to: "/offers" },
+    { name: "Enquiry", to: "/enquiry" },
   ];
 
   // Detect mobile
@@ -30,27 +31,30 @@ export default function Navbar() {
       <nav className="bg-blue-900 text-white shadow-md fixed top-0 left-0 w-full z-50 h-16 font-body">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-full items-center">
           
-          {/* Logo Text */}
-          <a href="/" className="text-2xl font-bold hover:text-yellow-400 transition">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="text-2xl font-bold hover:text-yellow-400 transition"
+          >
             National Auto Sales
-          </a>
+          </Link>
 
           {/* Desktop Links */}
           {!isMobile && (
             <div className="flex items-center space-x-6 font-medium">
               {links.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.to}
                   className="hover:text-yellow-400 transition-colors"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           )}
 
-          {/* Hamburger for Mobile */}
+          {/* Hamburger */}
           {isMobile && (
             <button
               onClick={() => setIsOpen(true)}
@@ -105,28 +109,30 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Links */}
+            {/* Mobile Links */}
             <div className="flex flex-col px-6 space-y-6 mt-4">
               {links.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.to}
                   onClick={() => setIsOpen(false)}
                   className="text-lg hover:text-yellow-400 font-medium transition-colors"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
 
             {/* CTA + Social */}
             <div className="px-6 mt-auto pb-6">
-              <a
-                href="/enquiry"
+              <Link
+                to="/enquiry"
+                onClick={() => setIsOpen(false)}
                 className="block text-center px-4 py-2 bg-yellow-400 text-blue-900 font-semibold rounded-full shadow hover:bg-yellow-500 transition mb-4"
               >
                 Enquiry Now
-              </a>
+              </Link>
+
               <div className="flex justify-center space-x-4 text-white">
                 <FaFacebookF className="hover:text-yellow-400 cursor-pointer" />
                 <FaInstagram className="hover:text-yellow-400 cursor-pointer" />
@@ -140,7 +146,7 @@ export default function Navbar() {
             <div
               className="fixed inset-0 bg-black bg-opacity-30 z-40"
               onClick={() => setIsOpen(false)}
-            ></div>
+            />
           )}
         </>
       )}
