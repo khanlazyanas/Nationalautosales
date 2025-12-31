@@ -1,0 +1,100 @@
+import { motion, useScroll } from "framer-motion";
+
+export default function TermsAndConditions() {
+  const { scrollYProgress } = useScroll();
+
+  const sections = [
+    {
+      title: "Acceptance of Terms",
+      text:
+        "By accessing or using our website, products, or services, you agree to comply with these Terms and Conditions.",
+    },
+    {
+      title: "Authorized Services",
+      text:
+        "National Auto Sales is an authorized Bajaj dealership offering vehicle sales, servicing, finance assistance, and related services.",
+    },
+    {
+      title: "Payments & Transactions",
+      text:
+        "Payments must be completed only through authorized channels. We are not liable for unauthorized or fraudulent transactions.",
+    },
+    {
+      title: "Limitation of Liability",
+      text:
+        "We shall not be liable for indirect or consequential damages arising from the use of our services or website.",
+    },
+    {
+      title: "Revisions to Terms",
+      text:
+        "These terms may be updated periodically. Continued usage constitutes acceptance of the revised terms.",
+    },
+  ];
+
+  return (
+    <main className="bg-slate-50 min-h-screen relative">
+      {/* Scroll Indicator */}
+      <motion.div
+        style={{ scaleX: scrollYProgress }}
+        className="fixed top-0 left-0 right-0 h-1 bg-yellow-400 origin-left z-50"
+      />
+
+      {/* HERO */}
+      <section className="relative pt-36 pb-28 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700">
+        <div className="absolute inset-0 bg-black/10" />
+
+        <div className="relative max-w-6xl mx-auto px-6 text-white">
+          <p className="text-sm text-blue-200 mb-4">
+            Home / Legal / <span className="text-yellow-400">Terms & Conditions</span>
+          </p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl font-bold tracking-tight mb-6"
+          >
+            Terms & Conditions
+          </motion.h1>
+
+          <p className="max-w-3xl text-lg text-blue-100 leading-relaxed">
+            These terms govern your access to and use of National Auto Sales’ website,
+            products, and services.
+          </p>
+        </div>
+      </section>
+
+      {/* CONTENT */}
+      <section className="-mt-20 pb-28 px-6">
+        <div className="max-w-6xl mx-auto bg-white rounded-[32px] shadow-2xl p-8 md:p-16">
+          <div className="space-y-14">
+            {sections.map((sec, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.12 }}
+                className="relative pl-16"
+              >
+                {/* Accent Line */}
+                <span className="absolute left-0 top-2 h-full w-1 bg-gradient-to-b from-yellow-400 to-blue-900 rounded-full" />
+
+                {/* Number Badge FIXED */}
+                <span className="absolute -left-6 top-4 z-10 w-12 h-12 rounded-full 
+                  bg-blue-900 text-white flex items-center justify-center 
+                  font-semibold shadow-xl ring-4 ring-white">
+                  {index + 1}
+                </span>
+
+                <h2 className="text-xl md:text-2xl font-semibold text-blue-900 mb-3">
+                  {sec.title}
+                </h2>
+                <p className="text-gray-700 leading-loose">{sec.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

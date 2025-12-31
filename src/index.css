@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* ❌ Global gradient hata diya, warna har jagah background dikh ke gap jaisa lag raha tha */
+body {
+  @apply text-white;
+  background-color: #000; /* Neutral background */
+}
+
+/* ✨ Fade-in animation */
+@layer utilities {
+  .animate-fadeIn {
+    @apply opacity-0;
+    animation: fadeIn 0.8s ease forwards;
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+}
