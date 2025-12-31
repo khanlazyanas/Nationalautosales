@@ -31,50 +31,68 @@ export default function Home() {
     <div className="w-full relative flex flex-col font-body text-gray-700">
 {/* ================= HERO ================= */}
 <div
-  className="relative w-full min-h-screen flex items-center justify-center text-center bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700"
+  className="relative w-full min-h-screen flex items-center justify-center text-center
+             bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700"
   style={{ marginTop: `${NAVBAR_HEIGHT}px` }}
 >
-  <div className="px-6 max-w-4xl">
+  <div className="px-6 max-w-3xl">
+
     {/* Main Heading */}
     <motion.h1
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="text-4xl md:text-6xl font-heading font-extrabold tracking-tight text-white mb-6"
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="text-3xl sm:text-4xl md:text-5xl
+                 font-heading font-semibold
+                 tracking-tight text-white mb-4"
     >
-      Welcome to <span className="text-yellow-400">Bajaj Auto Sales</span>
+      Welcome to{" "}
+      <span className="text-yellow-400 font-semibold">
+        Bajaj Auto Sales
+      </span>
     </motion.h1>
 
     {/* Subheading */}
     <motion.p
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 0.3 }}
-      className="text-lg md:text-xl text-blue-100 mb-8 leading-relaxed"
+      transition={{ delay: 0.15 }}
+      className="text-sm sm:text-base md:text-lg
+                 text-blue-200 leading-relaxed mb-8"
     >
-      Experience Bajaj’s power, performance and trusted service — all under one roof.
+      An authorised Bajaj dealership delivering performance,
+      reliability and trusted after-sales service.
     </motion.p>
 
     {/* CTA Buttons */}
-    <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+    <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+
       <motion.a
         href="/enquiry"
-        className="inline-block px-10 py-4 bg-yellow-400 text-blue-900 font-heading font-semibold tracking-wide text-lg rounded-full shadow-lg hover:bg-yellow-500"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        whileHover={{ scale: 1.02 }}
+        className="inline-flex items-center justify-center
+                   px-8 py-3
+                   bg-yellow-400 text-blue-900
+                   font-medium rounded-md
+                   shadow-sm hover:bg-yellow-500 transition"
       >
         Enquiry Now
       </motion.a>
 
       <motion.a
         href="/motorcycle"
-        className="inline-block px-10 py-4 border-2 border-yellow-400 text-yellow-400 font-heading font-semibold tracking-wide text-lg rounded-full shadow hover:bg-yellow-400 hover:text-blue-900 transition"
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.02 }}
+        className="inline-flex items-center justify-center
+                   px-8 py-3
+                   border border-yellow-400
+                   text-yellow-400 font-medium
+                   rounded-md
+                   hover:bg-yellow-400 hover:text-blue-900 transition"
       >
         View Latest Models
       </motion.a>
-    </div>
 
+    </div>
     {/* USP Badges */}
     <div className="flex flex-wrap justify-center gap-4 mb-8">
       {[
