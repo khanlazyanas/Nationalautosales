@@ -1,5 +1,7 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+const MotionLink = motion(Link); 
 
 export default function Home() {
   const NAVBAR_HEIGHT = 64;
@@ -56,27 +58,29 @@ export default function Home() {
 
       {/* CTA Buttons */}
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-        <motion.a
-          href="/enquiry"
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          className="px-8 py-3 bg-yellow-400 text-blue-900
-                     font-medium rounded-full shadow-lg
-                     hover:bg-yellow-500 transition"
-        >
-          Enquiry Now
-        </motion.a>
+        <MotionLink
+  to="/enquiry"
+  whileHover={{ y: -2 }}
+  whileTap={{ scale: 0.98 }}
+  className="px-8 py-3 bg-yellow-400 text-blue-900
+             font-medium rounded-full shadow-lg
+             hover:bg-yellow-500 transition"
+>
+  Enquiry Now
+</MotionLink>
 
-        <motion.a
-          href="/motorcycle"
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          className="px-8 py-3 border border-yellow-400
-                     text-yellow-400 font-medium rounded-full
-                     hover:bg-yellow-400 hover:text-blue-900 transition"
-        >
-          View Latest Models
-        </motion.a>
+
+        <MotionLink
+  to="/motorcycle"
+  whileHover={{ y: -2 }}
+  whileTap={{ scale: 0.98 }}
+  className="px-8 py-3 border border-yellow-400
+             text-yellow-400 font-medium rounded-full
+             hover:bg-yellow-400 hover:text-blue-900 transition"
+>
+  View Latest Models
+</MotionLink>
+
       </div>
 
       {/* Trust row */}
@@ -132,14 +136,14 @@ export default function Home() {
           {bike.name}
         </h3>
         <p className="mb-5">{bike.desc}</p>
-        <a
+        <Link
           href="/motorcycle"
           className="inline-block bg-blue-900 text-white
                      px-6 py-2 rounded-full text-sm
                      hover:bg-blue-800"
         >
           View Details
-        </a>
+        </Link>
       </motion.div>
     ))}
   </div>
@@ -278,14 +282,14 @@ export default function Home() {
   <p className="mb-6 text-lg">
     Visit our showroom or book a test ride today — only at Bajaj Auto Sales.
   </p>
-  <a
+  <Link
     href="/contact"
     className="bg-blue-900 text-white px-8 py-3
                rounded-full font-heading font-semibold
                hover:bg-blue-800 transition"
   >
     Contact Us
-  </a>
+  </Link>
 </section>
 
     </div>

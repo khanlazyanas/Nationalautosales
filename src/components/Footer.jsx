@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   FaFacebookF,
   FaInstagram,
@@ -20,10 +21,10 @@ export default function Footer() {
   const [showTop, setShowTop] = useState(false);
 
   const models = [
-    { name: "Pulsar", href: "/motorcycle?model=Pulsar" },
-    { name: "Platina", href: "/motorcycle?model=Platina" },
-    { name: "Avenger", href: "/motorcycle?model=Avenger" },
-    { name: "Dominar", href: "/motorcycle?model=Dominar" },
+    { name: "Pulsar", to: "/motorcycle?model=Pulsar" },
+    { name: "Platina", to: "/motorcycle?model=Platina" },
+    { name: "Avenger", to: "/motorcycle?model=Avenger" },
+    { name: "Dominar", to: "/motorcycle?model=Dominar" },
   ];
 
   useEffect(() => {
@@ -39,9 +40,9 @@ export default function Footer() {
     <>
       <footer className="bg-blue-900 text-white font-inter">
 
-        {/* TRUST + FINANCE STRIP */}
+        {/* TRUST STRIP */}
         <div className="border-b border-white/10 bg-blue-800">
-          <div className="max-w-7xl mx-auto px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-white/80">
+          <div className="max-w-7xl mx-auto px-6 py-4 grid md:grid-cols-3 gap-6 text-sm text-white/80">
             <div className="flex items-center gap-2">
               <FaCheckCircle className="text-yellow-400" />
               Authorized Bajaj Dealer
@@ -52,121 +53,125 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2">
               <FaStar className="text-yellow-400" />
-              4.7★ Google Rating (1200+ Reviews)
+              4.7★ Google Rating
             </div>
           </div>
         </div>
 
-        {/* MAIN FOOTER */}
-        <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* MAIN */}
+        <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
 
           {/* ABOUT */}
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-yellow-400">
+            <h3 className="text-lg font-poppins font-semibold text-yellow-400 mb-4">
               National Auto Sales
             </h3>
             <p className="text-sm text-white/80 mb-4">
-              Authorized Bajaj dealership delivering reliable two-wheelers and
-              trusted service excellence.
+              Authorized Bajaj dealership delivering reliable two-wheelers
+              with trusted service excellence.
             </p>
 
-            <div className="flex items-center mb-3 text-sm">
+            <div className="flex items-center text-sm mb-2">
               <FaPhoneAlt className="mr-3 text-yellow-400" />
-              <a href="tel:+919198090051" className="hover:text-yellow-300">
-                +91 91980 90051
-              </a>
+              <a href="tel:+919198090051">+91 91980 90051</a>
             </div>
 
-            <div className="flex items-center mb-3 text-sm">
+            <div className="flex items-center text-sm mb-2">
               <FaEnvelope className="mr-3 text-yellow-400" />
-              <a
-                href="mailto:customerservice@bajajauto.co.in"
-                className="hover:text-yellow-300"
-              >
+              <a href="mailto:customerservice@bajajauto.co.in">
                 customerservice@bajajauto.co.in
               </a>
             </div>
 
             <div className="flex items-start text-sm">
               <FaMapMarkerAlt className="mr-3 mt-1 text-yellow-400" />
-              <span className="text-white/80">
-                Main Road, Near Bajaj Showroom, Uttar Pradesh, India
-              </span>
+              Main Road, Near Bajaj Showroom, UP, India
             </div>
           </div>
 
           {/* QUICK LINKS */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-poppins font-semibold mb-4">
+              Quick Links
+            </h3>
             <ul className="space-y-2 text-sm text-white/80">
-              {["About Us", "Services", "Gallery", "Offers", "Enquiry"].map(
-                (item) => (
-                  <li key={item}>
-                    <a
-                      href={`/${item.toLowerCase().replace(" ", "")}`}
-                      className="hover:text-yellow-300 transition"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                )
-              )}
+              {[
+                { name: "About Us", to: "/about" },
+                { name: "Services", to: "/services" },
+                { name: "Gallery", to: "/gallery" },
+                { name: "Offers", to: "/offers" },
+                { name: "Enquiry", to: "/enquiry" },
+              ].map((l) => (
+                <li key={l.name}>
+                  <Link
+                    to={l.to}
+                    className="hover:text-yellow-300 transition"
+                  >
+                    {l.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* MODELS */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Our Models</h3>
+            <h3 className="text-lg font-poppins font-semibold mb-4">
+              Our Models
+            </h3>
 
             <button
               onClick={() => setOpen(!open)}
-              className="w-full flex items-center justify-between bg-blue-800 px-4 py-3 rounded-md hover:bg-blue-700 transition"
+              className="w-full flex justify-between items-center
+                         bg-blue-800 px-4 py-3 rounded-md"
             >
               <span className="text-sm">Select Bike Model</span>
               <FaChevronDown
-                className={`transition-transform ${open ? "rotate-180" : ""}`}
+                className={`transition ${open ? "rotate-180" : ""}`}
               />
             </button>
 
-            <div
-              className={`mt-2 overflow-hidden transition-all duration-300 ${
+            <ul
+              className={`mt-2 overflow-hidden transition-all ${
                 open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
-              }`}
+              } bg-blue-800 rounded-md`}
             >
-              <ul className="bg-blue-800 rounded-md divide-y divide-blue-700">
-                {models.map((m) => (
-                  <li key={m.name}>
-                    <a
-                      href={m.href}
-                      onClick={() => setOpen(false)}
-                      className="block px-4 py-3 text-sm hover:bg-yellow-400 hover:text-blue-900 transition"
-                    >
-                      {m.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {models.map((m) => (
+                <li key={m.name}>
+                  <Link
+                    to={m.to}
+                    onClick={() => setOpen(false)}
+                    className="block px-4 py-3 text-sm
+                               hover:bg-yellow-400 hover:text-blue-900"
+                  >
+                    {m.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* HOURS + SOCIAL */}
+          {/* HOURS */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Working Hours</h3>
-
-            <div className="flex items-center text-sm text-white/80 mb-2">
+            <h3 className="text-lg font-poppins font-semibold mb-4">
+              Working Hours
+            </h3>
+            <div className="flex items-center text-sm mb-2">
               <FaClock className="mr-3 text-yellow-400" />
               Mon – Sat: 9:30 AM – 7:00 PM
             </div>
+            <p className="text-sm mb-6">Sunday: Closed</p>
 
-            <p className="text-sm text-white/80 mb-6">Sunday: Closed</p>
-
-            <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
-            <div className="flex space-x-4">
+            <h3 className="text-lg font-poppins font-semibold mb-3">
+              Follow Us
+            </h3>
+            <div className="flex gap-4">
               {[FaFacebookF, FaInstagram, FaLinkedinIn].map((Icon, i) => (
                 <a
                   key={i}
                   href="#"
-                  className="p-3 bg-blue-800 rounded-full hover:bg-yellow-400 hover:text-blue-900 transition"
+                  className="p-3 bg-blue-800 rounded-full
+                             hover:bg-yellow-400 hover:text-blue-900"
                 >
                   <Icon />
                 </a>
@@ -175,46 +180,42 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* LEGAL DISCLAIMER */}
-        <div className="text-center text-xs text-white/60 px-6 pb-3">
-          Images shown are for representation purpose only. Terms & conditions apply.
-        </div>
+        {/* BOTTOM */}
+        <div className="bg-blue-950 py-5 px-6 flex flex-col md:flex-row
+                        justify-between items-center text-sm text-white/70">
+          <p>© {new Date().getFullYear()} National Auto Sales</p>
 
-        {/* BOTTOM BAR */}
-        <div className="bg-blue-950 py-5 px-6 flex flex-col md:flex-row items-center justify-between text-sm text-white/70">
-          <p>
-            © {new Date().getFullYear()} National Auto Sales. All rights reserved.
-          </p>
-
-          <div className="flex gap-6 my-2 md:my-0">
-            <a href="/terms" className="hover:text-yellow-300">Terms</a>
-            <a href="/privacy" className="hover:text-yellow-300">Privacy</a>
+          <div className="flex gap-6 my-2">
+            <Link to="/terms">Terms</Link>
+            <Link to="/privacy">Privacy</Link>
           </div>
 
-          <p className="font-poppins text-yellow-400 tracking-wide">
+          <p className="font-poppins text-yellow-400">
             Developed by <span className="font-semibold">Anas Khan</span>
           </p>
         </div>
       </footer>
 
-      {/* MOVE TO TOP */}
+      {/* TOP */}
       {showTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 bg-yellow-400 text-blue-900 p-3 rounded-full shadow-lg hover:bg-yellow-300 transition"
+          className="fixed bottom-6 right-6 bg-yellow-400
+                     text-blue-900 p-3 rounded-full shadow-lg"
         >
           <FaArrowUp />
         </button>
       )}
 
-      {/* WHATSAPP FLOAT */}
+      {/* WHATSAPP */}
       <a
         href="https://wa.me/919198090051"
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-6 left-6 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-400 transition"
+        className="fixed bottom-6 left-6 bg-green-500
+                   text-white p-3 rounded-full shadow-lg"
       >
-        <FaWhatsapp size={20} />
+        <FaWhatsapp />
       </a>
     </>
   );
