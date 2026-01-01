@@ -84,7 +84,7 @@ export default function Home() {
       </div>
 
       {/* Trust row */}
-      <div className="flex flex-wrap justify-center gap-6 text-sm text-white/80">
+      <div className="flex flex-wrap justify-center gap-6 text-sm text-white bg-blue-900 p-4 rounded">
         <span>✔ Authorised Bajaj Dealer</span>
         <span>✔ Genuine Spare Parts</span>
         <span>✔ Transparent Pricing</span>
