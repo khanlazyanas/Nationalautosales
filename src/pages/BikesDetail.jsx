@@ -1,3 +1,4 @@
+import React from "react"; // 🔥 Ye line miss ho gayi thi!
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Settings, Zap, Gauge, CheckCircle, ArrowLeft, Fuel, Activity } from "lucide-react";
