@@ -1,16 +1,11 @@
+/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",  // <-- Ye line sabse zaroori hai!
   ],
-  darkMode: false,
   theme: {
-    extend: {
-      fontFamily: {
-        heading: ["Poppins", "sans-serif"],
-        body: ["Inter", "sans-serif"],
-      },
-    },
+    extend: {},
   },
   plugins: [],
-};
+}

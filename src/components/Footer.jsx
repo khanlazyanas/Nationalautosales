@@ -1,178 +1,113 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaChevronDown,
-  FaClock,
-  FaArrowUp,
-  FaStar,
-  FaCheckCircle,
-  FaMoneyBillWave,
-  FaWhatsapp,
+  FaFacebookF, FaInstagram, FaLinkedinIn, FaPhoneAlt, FaEnvelope, 
+  FaMapMarkerAlt, FaClock, FaArrowUp, FaStar, FaCheckCircle, FaMoneyBillWave, FaWhatsapp,
 } from "react-icons/fa";
 
 export default function Footer() {
-  const [open, setOpen] = useState(false);
   const [showTop, setShowTop] = useState(false);
-
-  const models = [
-    { name: "Pulsar", to: "/motorcycle?model=Pulsar" },
-    { name: "Platina", to: "/motorcycle?model=Platina" },
-    { name: "Avenger", to: "/motorcycle?model=Avenger" },
-    { name: "Dominar", to: "/motorcycle?model=Dominar" },
-  ];
+  const [isClosed, setIsClosed] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setShowTop(window.scrollY > 300);
+    // Scroll To Top Logic
+    const handleScroll = () => setShowTop(window.scrollY > 400);
     window.addEventListener("scroll", handleScroll);
+
+    // 🔥 Dynamic Day Logic (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    const today = new Date().getDay();
+    // Agar aaj Saturday (6) hai, toh isClosed true ho jayega
+    if (today === 6) {
+      setIsClosed(true);
+    } else {
+      setIsClosed(false);
+    }
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () =>
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <>
-      <footer className="bg-blue-900 text-white font-inter">
+      <footer className="bg-[#030712] text-slate-300 font-inter border-t border-white/5 relative overflow-hidden">
+        
+        {/* Subtle Background Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[100px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none" />
 
-        {/* TRUST STRIP */}
-        <div className="border-b border-white/10 bg-blue-800">
-          <div className="max-w-7xl mx-auto px-6 py-4 grid md:grid-cols-3 gap-6 text-sm text-white/80">
-            <div className="flex items-center gap-2">
-              <FaCheckCircle className="text-yellow-400" />
-              Authorized Bajaj Dealer
-            </div>
-            <div className="flex items-center gap-2">
-              <FaMoneyBillWave className="text-yellow-400" />
-              EMI & Bajaj Finance Available
-            </div>
-            <div className="flex items-center gap-2">
-              <FaStar className="text-yellow-400" />
-              4.7★ Google Rating
-            </div>
+        {/* Trust Strip */}
+        <div className="bg-white/[0.02] border-b border-white/5 relative z-10">
+          <div className="max-w-7xl mx-auto px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-bold tracking-widest uppercase text-slate-400 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-2"><FaCheckCircle className="text-cyan-400 text-base" /> Authorized Dealer</div>
+            <div className="flex items-center justify-center md:justify-start gap-2"><FaMoneyBillWave className="text-cyan-400 text-base" /> Easy Finance</div>
+            <div className="flex items-center justify-center md:justify-start gap-2"><FaStar className="text-cyan-400 text-base" /> Premium Service</div>
           </div>
         </div>
 
-        {/* MAIN */}
-        <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
-
-          {/* ABOUT */}
+        {/* Main Footer */}
+        <div className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-4 md:grid-cols-2 gap-12 text-sm relative z-10">
+          
+          {/* Brand & Contact */}
           <div>
-            <h3 className="text-lg font-poppins font-semibold text-yellow-400 mb-4">
-              National Auto Sales
-            </h3>
-            <p className="text-sm text-white/80 mb-4">
-              Authorized Bajaj dealership delivering reliable two-wheelers
-              with trusted service excellence.
+            <h3 className="text-2xl font-black text-white mb-4 tracking-tighter">NATIONAL<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">AUTO</span></h3>
+            <p className="mb-6 font-light leading-relaxed text-slate-400">
+              Your elite partner for Bajaj machines. Sales, premium service, and genuine spares under one roof.
             </p>
-
-            <div className="flex items-center text-sm mb-2">
-              <FaPhoneAlt className="mr-3 text-yellow-400" />
-              <a href="tel:+919198090051">+91 91980 90051</a>
-            </div>
-
-            <div className="flex items-center text-sm mb-2">
-              <FaEnvelope className="mr-3 text-yellow-400" />
-              <a href="mailto:customerservice@bajajauto.co.in">
-                customerservice@bajajauto.co.in
-              </a>
-            </div>
-
-            <div className="flex items-start text-sm">
-              <FaMapMarkerAlt className="mr-3 mt-1 text-yellow-400" />
-              Main Road, Near Bajaj Showroom, UP, India
+            <div className="space-y-3 font-mono text-xs">
+              <a href="tel:+919198090051" className="flex items-center gap-3 hover:text-cyan-400 transition-colors"><FaPhoneAlt className="text-slate-500" /> +91 91980 90051</a>
+              <div className="flex items-start gap-3"><FaMapMarkerAlt className="text-slate-500 mt-0.5 text-base shrink-0" /> Ubhaon Road, Belthara Road, Ballia, UP</div>
             </div>
           </div>
 
-          {/* QUICK LINKS */}
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-poppins font-semibold mb-4">
-              Quick Links
-            </h3>
-            <ul className="space-y-2 text-sm text-white/80">
-              {[
-                { name: "About Us", to: "/about" },
-                { name: "Services", to: "/services" },
-                { name: "Gallery", to: "/gallery" },
-                { name: "Offers", to: "/offers" },
-                { name: "Enquiry", to: "/enquiry" },
-              ].map((l) => (
-                <li key={l.name}>
-                  <Link
-                    to={l.to}
-                    className="hover:text-yellow-300 transition"
-                  >
-                    {l.name}
+            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
+            <ul className="space-y-3 font-light text-slate-400">
+              {['Motorcycle', 'About Us', 'Services', 'Gallery', 'Offers', 'Contact'].map(item => (
+                <li key={item}>
+                  <Link to={`/${item.toLowerCase().replace(' ', '')}`} className="hover:text-cyan-400 hover:pl-2 transition-all block">
+                    {item}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* MODELS */}
+          {/* Legal & Status */}
           <div>
-            <h3 className="text-lg font-poppins font-semibold mb-4">
-              Our Models
-            </h3>
-
-            <button
-              onClick={() => setOpen(!open)}
-              className="w-full flex justify-between items-center
-                         bg-blue-800 px-4 py-3 rounded-md"
-            >
-              <span className="text-sm">Select Bike Model</span>
-              <FaChevronDown
-                className={`transition ${open ? "rotate-180" : ""}`}
-              />
-            </button>
-
-            <ul
-              className={`mt-2 overflow-hidden transition-all ${
-                open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
-              } bg-blue-800 rounded-md`}
-            >
-              {models.map((m) => (
-                <li key={m.name}>
-                  <Link
-                    to={m.to}
-                    onClick={() => setOpen(false)}
-                    className="block px-4 py-3 text-sm
-                               hover:bg-yellow-400 hover:text-blue-900"
-                  >
-                    {m.name}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Legal</h4>
+            <ul className="space-y-3 font-light text-slate-400 mb-8">
+              <li>
+                <Link to="/privacy" className="hover:text-cyan-400 hover:pl-2 transition-all block">Privacy Policy</Link>
+              </li>
+              <li>
+                <Link to="/terms" className="hover:text-cyan-400 hover:pl-2 transition-all block">Terms & Conditions</Link>
+              </li>
             </ul>
+
+            <h4 className="text-white font-bold mb-4 uppercase tracking-widest text-xs">Showroom Status</h4>
+            <div className="space-y-3">
+              <p className="flex items-center gap-2 text-slate-400 font-light text-xs"><FaClock className="text-slate-500" /> Sun - Fri: 9:30 AM - 7:00 PM</p>
+              
+              {/* ✅ DYNAMIC OPEN/CLOSE BADGE */}
+              {isClosed ? (
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 font-bold text-[10px] uppercase tracking-widest">
+                  <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Closed Today (Saturday)
+                </div>
+              ) : (
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 font-bold text-[10px] uppercase tracking-widest">
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Open Today
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* HOURS */}
+          {/* Social */}
           <div>
-            <h3 className="text-lg font-poppins font-semibold mb-4">
-              Working Hours
-            </h3>
-            <div className="flex items-center text-sm mb-2">
-              <FaClock className="mr-3 text-yellow-400" />
-              Mon – Sat: 9:30 AM – 7:00 PM
-            </div>
-            <p className="text-sm mb-6">Sunday: Closed</p>
-
-            <h3 className="text-lg font-poppins font-semibold mb-3">
-              Follow Us
-            </h3>
+            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Connect</h4>
             <div className="flex gap-4">
               {[FaFacebookF, FaInstagram, FaLinkedinIn].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="p-3 bg-blue-800 rounded-full
-                             hover:bg-yellow-400 hover:text-blue-900"
-                >
+                <a key={i} href="#" className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-full hover:bg-cyan-500 hover:border-cyan-400 hover:text-[#030712] transition-all shadow-lg">
                   <Icon />
                 </a>
               ))}
@@ -180,43 +115,27 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM */}
-        <div className="bg-blue-950 py-5 px-6 flex flex-col md:flex-row
-                        justify-between items-center text-sm text-white/70">
-          <p>© {new Date().getFullYear()} National Auto Sales</p>
-
-          <div className="flex gap-6 my-2">
-            <Link to="/terms">Terms</Link>
-            <Link to="/privacy">Privacy</Link>
-          </div>
-
-          <p className="font-poppins text-yellow-400">
-            Developed by <span className="font-semibold">Anas Khan</span>
+        {/* Copyright */}
+        <div className="border-t border-white/5 bg-[#010308] py-6 text-center">
+          <p className="text-[10px] font-bold tracking-widest uppercase text-slate-600">
+            © {new Date().getFullYear()} National Auto. All Rights Reserved.
           </p>
         </div>
       </footer>
 
-      {/* TOP */}
-      {showTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-6 right-6 bg-yellow-400
-                     text-blue-900 p-3 rounded-full shadow-lg"
-        >
-          <FaArrowUp />
-        </button>
-      )}
+      {/* Floating WhatsApp Button */}
+      <div className="fixed bottom-6 left-6 z-50">
+        <a href="https://wa.me/919198090051" target="_blank" rel="noreferrer" className="flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-green-600 to-green-400 text-white rounded-full shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:scale-110 hover:shadow-[0_0_30px_rgba(34,197,94,0.6)] transition-all">
+          <FaWhatsapp size={28} />
+        </a>
+      </div>
 
-      {/* WHATSAPP */}
-      <a
-        href="https://wa.me/919198090051"
-        target="_blank"
-        rel="noreferrer"
-        className="fixed bottom-6 left-6 bg-green-500
-                   text-white p-3 rounded-full shadow-lg"
-      >
-        <FaWhatsapp />
-      </a>
+      {/* Scroll to Top */}
+      <div className={`fixed bottom-6 right-6 z-50 transition-all duration-500 ${showTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+        <button onClick={scrollToTop} className="flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:bg-cyan-500 hover:border-cyan-400 hover:text-[#030712] transition-all">
+          <FaArrowUp size={20} />
+        </button>
+      </div>
     </>
   );
 }
