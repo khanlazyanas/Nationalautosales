@@ -22,3 +22,17 @@ html, body, #root {
 ::-webkit-scrollbar-thumb:hover {
   background: #475569;
 }
+
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
