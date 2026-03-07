@@ -181,7 +181,7 @@ export default function Contact() {
         >
           {/* Magic CSS to make Google Maps Dark Mode */}
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.555488430799!2d90.39945241536221!3d23.750891594205842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8591b90c2e7%3A0x3e2fa5a9d88c43!2sBajaj%20Showroom!5e0!3m2!1sen!2sin!4v1695768494000!5m2!1sen!2sin"
+            src="https://maps.google.com/maps?q=National%20Bajaj%20Showroom,%20Belthara%20Road&t=&z=15&ie=UTF8&iwloc=&output=embed"
             className="w-full h-full border-0 absolute inset-0"
             allowFullScreen=""
             loading="lazy"
